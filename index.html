@@ -112,6 +112,28 @@
   <p>© 2026 Lux Papelaria - Todos os direitos reservados.</p>
 </footer>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getDatabase } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBt3IoovnnYkdBNzTwXgaqVPaAgvOYbKf8",
+    authDomain: "lux-papelaria.firebaseapp.com",
+    databaseURL: "https://lux-papelaria-default-rtdb.firebaseio.com",
+    projectId: "lux-papelaria",
+    storageBucket:  "lux-papelaria.firebasestorage.app",
+    messagingSenderId: "651144008791",
+    appId: "1:651144008791:web:16b818c1e870391ac53f12",
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getDatabase(app);
+
+  console.log("Firebase conectado!");
+</script>
 <script src="script.js"></script>
+
 </body>
 </html>

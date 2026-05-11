@@ -1,0 +1,220 @@
+# Tela de Login VIP — Lux Papelaria
+
+Crie um novo arquivo chamado:
+
+```txt
+login.html
+```
+
+Cole ESTE código completo:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Área VIP - Lux Papelaria</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #111, #1f1f1f);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .login-box {
+      width: 380px;
+      background: #1b1b1b;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 208, 0, 0.2);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo h1 {
+      color: #ffd000;
+      font-size: 32px;
+    }
+
+    .logo p {
+      color: #999;
+      margin-top: 8px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      background: #2a2a2a;
+      color: white;
+      font-size: 15px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: #ffd000;
+      color: black;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.02);
+    }
+
+    .create {
+      text-align: center;
+      margin-top: 18px;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .create span {
+      color: #ffd000;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #status {
+      text-align: center;
+      margin-top: 18px;
+      color: #ffd000;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+
+    <div class="logo">
+      <h1>Lux Papelaria</h1>
+      <p>Área VIP de Clientes</p>
+    </div>
+
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="Digite seu email">
+    </div>
+
+    <div class="input-group">
+      <label>Senha</label>
+      <input type="password" id="senha" placeholder="Digite sua senha">
+    </div>
+
+    <button class="btn" onclick="login()">
+      Entrar
+    </button>
+
+    <div class="create">
+      Não possui conta?
+      <span onclick="cadastro()">Criar conta</span>
+    </div>
+
+    <p id="status"></p>
+
+  </div>
+
+  <script type="module">
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: AIzaSyBt3IoovnnYkdBNzTwXgaqVPaAgvOYbKf8",
+      authDomain:"lux-papelaria.firebaseapp.com",
+      projectId: "lux-papelaria",
+      storageBucket: "lux-papelaria.firebasestorage.app",
+      messagingSenderId: "651144008791",
+      appId:"1:651144008791:web:16b818c1e870391ac53f12",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.login = async function () {
+
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+      const status = document.getElementById("status");
+
+      try {
+
+        await signInWithEmailAndPassword(auth, email, senha);
+
+        status.innerHTML = "Login realizado com sucesso!";
+
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1500);
+
+      } catch (error) {
+
+        status.innerHTML = "Email ou senha inválidos";
+
+      }
+    }
+
+    window.cadastro = async function () {
+
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+      const status = document.getElementById("status");
+
+      try {
+
+        await createUserWithEmailAndPassword(auth, email, senha);
+
+        status.innerHTML = "Conta criada com sucesso!";
+
+      } catch (error) {
+
+        status.innerHTML = "Erro ao criar conta";
+
+      }
+    }
+
+  </script>
+
+</body>
+</html>
+```
